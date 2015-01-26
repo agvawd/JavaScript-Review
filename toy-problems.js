@@ -166,8 +166,11 @@ debugger;
 var removeDuplicates = function(str) {
 	str = str.split("");
 	for(var i = 0; i < str.length; i++) {
-		if(str.indexOf(i)) {
-			console.log(str.indexOf(i));
+		for(var j = i; j < str.length; j++) {
+			if(str[i] === str[j + 1]) {
+				str.splice(j+1, 1);
+				j--;
+			}
 		}
 	}
 	return str.join("");
@@ -178,7 +181,19 @@ removeDuplicates(sentence);
 /*
 Write a sum method which will work properly when invoked using either syntax below.
 
-console.log(sum(2,3));   // Outputs 5
-console.log(sum(2)(3));  // Outputs 5
 
 */
+
+var sum = function(numOne) {
+	if(arguments.length === 2) {
+		return arguments[0] + arguments[1];
+	}
+	else {
+		return function(numTwo){
+			return numOne + numTwo;
+		}
+	}
+}
+
+console.log(sum(2,3));   // Outputs 5
+console.log(sum(2)(3));  // Outputs 5
