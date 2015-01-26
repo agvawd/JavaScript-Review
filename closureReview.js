@@ -10,7 +10,8 @@ var callFriend = function(){
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
   //code here
-
+  var innerFn = callFriend();
+  innerFn("435-215-9248");
 
 
 /*
@@ -18,5 +19,21 @@ var callFriend = function(){
 Write a function that accepts a function as it's only argument and returns a new function (which calls the original function that was passed in) that can only ever be executed once.
 
 Once completed, add a second arguments that allows the function to be executed N number of times. After the function has been called N number of times, console.log('STAHHP');
-
 */
+
+var sayName = function() {
+	return console.log("Allen");
+}
+
+var outerFn = function(otherFn, count) {
+	return function() {
+		count > 0 ? otherFn() : console.log("STAHHP");
+/*		if(count > 0)
+			 otherFn();
+		else
+			console.log("STAHHP")*/
+		count--;
+	}
+}
+
+var innerFn = outerFn(sayName, 5);
